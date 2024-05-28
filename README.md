@@ -15,7 +15,7 @@
 
 ## Description
 
-What it does
+This is the official repository for the paper "Instruct-MusicGen: Unlocking Text-to-Music Editing for Music Language Models via Instruction Tuning".
 
 ## Installation
 
@@ -23,11 +23,11 @@ What it does
 
 ```bash
 # clone project
-git clone https://github.com/YourGithubName/your-repo-name
-cd your-repo-name
+git clone https://github.com/xxx/instruct-MusicGen/
+cd instruct-MusicGen
 
 # [OPTIONAL] create conda environment
-conda create -n myenv python=3.9
+conda create -n myenv python=3.11.7
 conda activate myenv
 
 # install pytorch according to instructions
@@ -41,8 +41,8 @@ pip install -r requirements.txt
 
 ```bash
 # clone project
-git clone https://github.com/YourGithubName/your-repo-name
-cd your-repo-name
+git clone https://github.com/xxx/instruct-MusicGen/
+cd instruct-MusicGen
 
 # create conda environment and install dependencies
 conda env create -f environment.yaml -n myenv
@@ -63,14 +63,9 @@ python src/train.py trainer=cpu
 python src/train.py trainer=gpu
 ```
 
-Train model with chosen experiment configuration from [configs/experiment/](configs/experiment/)
-
-```bash
-python src/train.py experiment=experiment_name.yaml
-```
 
 You can override any parameter from command line like this
 
 ```bash
-python src/train.py trainer.max_epochs=20 data.batch_size=64
+python src/train.py trainer.max_epochs=50 data.batch_size=4
 ```
