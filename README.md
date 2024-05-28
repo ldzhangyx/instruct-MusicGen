@@ -17,6 +17,8 @@
 
 This is the official repository for the paper "Instruct-MusicGen: Unlocking Text-to-Music Editing for Music Language Models via Instruction Tuning".
 
+**We will release the source code and model weights very soon.**
+
 ## Installation
 
 #### Pip
