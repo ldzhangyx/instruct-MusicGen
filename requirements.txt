@@ -1,0 +1,51 @@
+# --------- pytorch --------- #
+torch>=2.3.0
+torchvision>=0.15.0
+lightning>=2.0.0
+torchmetrics>=0.11.4
+
+# --------- hydra --------- #
+hydra-core==1.3.2
+hydra-colorlog==1.2.0
+hydra-optuna-sweeper==1.2.0
+
+# --------- loggers --------- #
+wandb
+
+# --------- model --------- #
+transformers[torch]>=4.34.0
+peft
+
+# --------- audiocraft --------- #
+av
+julius
+einops
+flashy
+xformers
+num2words
+spacy
+sentencepiece
+
+# --------- evaluation --------- #
+torchlibrosa
+braceexpand
+ftfy
+progressbar
+webdataset
+wget
+encodec
+laion_clap --install-option="--no-deps"
+frechet_audio_distance --install-option="--no-deps"  # transformers version conflict
+git+https://github.com/haoheliu/audioldm_eval
+
+# --------- data --------- #
+resampy
+mirdata
+smart_open
+git+https://github.com/moises-ai/moises-db.git
+
+# --------- others --------- #
+rootutils       # standardizing the project root setup
+pre-commit      # hooks for applying linters on commit
+rich            # beautiful text formatting in terminal
+pytest          # tests
