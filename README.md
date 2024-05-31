@@ -17,6 +17,8 @@
 
 This is the official repository for the paper "Instruct-MusicGen: Unlocking Text-to-Music Editing for Music Language Models via Instruction Tuning".
 
+If there is any problem related to the code running, please open an issue and I will help you as mush as I can.
+
 ## Demo page
 
 https://bit.ly/instruct-musicgen
@@ -92,7 +94,7 @@ Currently it should be completed manually. But we will provide a script to autom
 
 
 ```bash
-python sec/eval.py
+python src/eval.py
 ```
 
 ### Step 3: Evaluate
@@ -100,6 +102,7 @@ python sec/eval.py
 Please make sure the generated music files are in the corresponding locations.
 
 ```bash
+python evaluation/utils.py  # to generate a csv file for CLAP calculation
 python evaluation/main.py
 ```
 
