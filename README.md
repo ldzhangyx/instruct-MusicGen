@@ -8,7 +8,7 @@
 [![lightning](https://img.shields.io/badge/-Lightning_2.0+-792ee5?logo=pytorchlightning&logoColor=white)](https://pytorchlightning.ai/)
 [![hydra](https://img.shields.io/badge/Config-Hydra_1.3-89b8cd)](https://hydra.cc/)
 <a href="https://github.com/ashleve/lightning-hydra-template"><img alt="Template" src="https://img.shields.io/badge/-Lightning--Hydra--Template-017F2F?style=flat&logo=github&labelColor=gray"></a><br>
-[![Paper](http://img.shields.io/badge/paper-arxiv.1001.2234-B31B1B.svg)](https://www.nature.com/articles/nature14539)
+[![Paper](http://img.shields.io/badge/paper-arxiv.2405.18386-B31B1B.svg)](https://www.nature.com/articles/nature14539)
 [![Conference](http://img.shields.io/badge/AnyConference-year-4b44ce.svg)](https://papers.nips.cc/paper/2020)
 
 </div>
@@ -17,7 +17,9 @@
 
 This is the official repository for the paper "Instruct-MusicGen: Unlocking Text-to-Music Editing for Music Language Models via Instruction Tuning".
 
-**We will release the source code and model weights very soon.**
+## Demo page
+
+https://bit.ly/instruct-musicgen
 
 ## Installation
 
@@ -25,7 +27,7 @@ This is the official repository for the paper "Instruct-MusicGen: Unlocking Text
 
 ```bash
 # clone project
-git clone https://github.com/xxx/instruct-MusicGen/
+git clone https://github.com/ldzhangyx/instruct-MusicGen/
 cd instruct-MusicGen
 
 # [OPTIONAL] create conda environment
@@ -43,7 +45,7 @@ pip install -r requirements.txt
 
 ```bash
 # clone project
-git clone https://github.com/xxx/instruct-MusicGen/
+git clone https://github.com/ldzhangyx/instruct-MusicGen/
 cd instruct-MusicGen
 
 # create conda environment and install dependencies
@@ -65,9 +67,42 @@ python src/train.py trainer=cpu
 python src/train.py trainer=gpu
 ```
 
+You may need to change essential parameters in `config/config.yaml` to fit your own dataset.
+
 
 You can override any parameter from command line like this
 
 ```bash
 python src/train.py trainer.max_epochs=50 data.batch_size=4
 ```
+
+## Evaluation
+
+### Step 1: Generate evaluation datasets
+
+```bash
+python src/data/slakh_datamodule.py
+```
+
+### Step 2: Generate music files
+
+For `add`, `remove`, `extract` operation, please change the parameters in both `test_step()` in `src/models/instructmusicgenadapter_module.py` and `__getitem__()` in `src/data/slakh_datamodule.py`.
+
+Currently it should be completed manually. But we will provide a script to automate this process soon.
+
+
+```bash
+python sec/eval.py
+```
+
+### Step 3: Evaluate
+
+Please make sure the generated music files are in the corresponding locations.
+
+```bash
+python evaluation/main.py
+```
+
+## Inference script
+
+TBD

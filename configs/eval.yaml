@@ -1,0 +1,18 @@
+# @package _global_
+
+defaults:
+  - _self_
+  - data: slakh # choose datamodule with `test_dataloader()` for evaluation
+  - model: instructmusicgenadapter
+  - logger: wandb
+  - trainer: default
+  - paths: default
+  - extras: default
+  - hydra: default
+
+task_name: "eval"
+
+tags: ["dev"]
+
+# passing checkpoint path is necessary for evaluation
+ckpt_path: /data2/yixiao/instruct-MusicGen/logs/train/runs/2024-04-22_20-25-42/checkpoints/epoch_138.ckpt

@@ -1,0 +1,38 @@
+_target_: src.models.instructmusicgenadapter_module.InstructMusicGenAdapterLitModule
+
+optimizer:
+  _target_: torch.optim.AdamW
+  _partial_: true
+  lr: 1e-4  # less than the final lr of base model
+  weight_decay: 0.05
+
+scheduler:
+  _target_: torch.optim.lr_scheduler.CosineAnnealingLR
+  _partial_: true
+  T_max: 100
+  eta_min: 1e-6
+
+
+#net:
+#  _target_: src.models.components.simple_dense_net.SimpleDenseNet
+#  input_size: 784
+#  lin1_size: 64
+#  lin2_size: 128
+#  lin3_size: 64
+#  output_size: 10
+
+tmp_dir: ${paths.tmp_dir}
+
+# compile model for faster training with pytorch 2.0
+compile: false
+
+# generation parameters
+instructor:
+  _target_: src.models.components.model.Instructor
+  _partial_: true
+  sec: 5
+  num_layers: 48
+  latent_dim: 2048
+  top_k: 100
+
+audio_regularization: 0
