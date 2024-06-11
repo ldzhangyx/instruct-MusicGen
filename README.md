@@ -109,3 +109,14 @@ python evaluation/main.py
 ## Inference script
 
 TBD
+
+## Citation
+
+```
+@article{zhang2024instruct,
+  title={Instruct-MusicGen: Unlocking Text-to-Music Editing for Music Language Models via Instruction Tuning},
+  author={Zhang, Yixiao and Ikemiya, Yukara and Choi, Woosung and Murata, Naoki and Mart{\'\i}nez-Ram{\'\i}rez, Marco A and Lin, Liwei and Xia, Gus and Liao, Wei-Hsiang and Mitsufuji, Yuki and Dixon, Simon},
+  journal={arXiv preprint arXiv:2405.18386},
+  year={2024}
+}
+```
