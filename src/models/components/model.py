@@ -365,7 +365,7 @@ class Instructor(nn.Module):
                                                 r=32,
                                                 lora_alpha=64)
 
-        # self.peft_model.lm.transformer = peft.get_peft_model(self.peft_model.lm.transformer, self.text_lora_config)
+        self.peft_model.lm.transformer = peft.get_peft_model(self.peft_model.lm.transformer, self.text_lora_config)
 
     def set_training(self):
         self.peft_model.set_training()
