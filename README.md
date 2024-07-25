@@ -19,6 +19,16 @@ This is the official repository for the paper "Instruct-MusicGen: Unlocking Text
 
 If there is any problem related to the code running, please open an issue and I will help you as mush as I can.
 
+## Official pretrained ckpt
+
+To promote transparency and reproducibility in research, I have retrained a similar model using publicly available datasets after the internship. This model has been trained on public data and adheres to the same methodology described in the paper.
+
+Note that this is not the official ckpt, which can match the results in this paper. This pretrained model has NO relation with Sony.
+
+https://drive.google.com/file/d/1F4GaKuMqPjftjqOo2t5wdhix0R2bQStT/view?usp=drive_link
+
+
+
 ## Demo page
 
 https://bit.ly/instruct-musicgen
