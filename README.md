@@ -118,7 +118,11 @@ python evaluation/main.py
 
 ## Inference script
 
-TBD
+After preparing the checkpoint and the input audio file, you can generate audio via
+
+```bash
+python src/inference.py
+```
 
 ## Citation
 
