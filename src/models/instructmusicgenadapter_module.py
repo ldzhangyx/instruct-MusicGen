@@ -1,3 +1,9 @@
+"""PyTorch Lightning module for InstructMusicGen model with adapter-based instruction tuning.
+
+This module implements the training, validation, and testing logic for the InstructMusicGen
+model, which enables text-based instruction editing of music using parameter-efficient
+fine-tuning with adapters.
+"""
 from typing import Any, Dict, Tuple
 
 import numpy as np
@@ -51,22 +57,9 @@ class InstructMusicGenAdapterLitModule(LightningModule):
 
         self.uuid = str(uuid.uuid4())
 
-        # self.model.musicgen.compression_model.train()
-        # for param in self.model.musicgen.compression_model.parameters():
-        #     param.requires_grad = False
-
-
     def forward(self, batch) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
 
         input_stems_mix, output_stems_mix, instruction_text = batch
-
-
-        # if isinstance(input_stems_mix, torch.Tensor):
-        #     input_stems_mix_np = input_stems_mix.detach().cpu().numpy()
-        #     input_stems_mix = [input_stems_mix_np[i, :] for i in range(input_stems_mix_np.shape[0])]
-        # if isinstance(output_stems_mix, torch.Tensor):
-        #     output_stems_mix_np = output_stems_mix.detach().cpu().numpy()
-        #     output_stems_mix = [output_stems_mix_np[i, :] for i in range(output_stems_mix_np.shape[0])]
 
         # add channel dimension
         input_stems_mix = input_stems_mix.unsqueeze(1).float()
@@ -136,9 +129,7 @@ class InstructMusicGenAdapterLitModule(LightningModule):
 
         # update and log metrics
         self.train_loss(loss)
-        # self.train_acc(preds, targets)
         self.log("train/loss", self.train_loss, on_step=True, on_epoch=True, prog_bar=True)
-        # self.log("train/acc", self.train_acc, on_step=True, on_epoch=True, prog_bar=True)
 
         # return loss or backpropagation will fail
         return loss
@@ -159,9 +150,7 @@ class InstructMusicGenAdapterLitModule(LightningModule):
 
         # update and log metrics
         self.val_loss(loss)
-        # self.val_acc(preds, targets)
         self.log("val/loss", self.val_loss, on_step=True, on_epoch=True, prog_bar=True)
-        # self.log("val/acc", self.val_acc, on_step=True, on_epoch=True, prog_bar=True)
 
         if len(self.generation_sample) < 10:
             input_stems_mix, output_stems_mix, instruction_text = batch
@@ -211,11 +200,6 @@ class InstructMusicGenAdapterLitModule(LightningModule):
 
     def on_validation_epoch_end(self) -> None:
         "Lightning hook that is called when a validation epoch ends."
-        # acc = self.val_acc.compute()  # get current val acc
-        # self.val_acc_best(acc)  # update best so far val acc
-        # # log `val_acc_best` as a value through `.compute()` method, instead of as a metric object
-        # # otherwise metric would be reset by lightning after each epoch
-        # self.log("val/acc_best", self.val_acc_best.compute(), sync_dist=True, prog_bar=True)
         self.logger.log_table(key="val/audio",
                               columns=['input', 'output', 'ground_truth', 'instruct'],
                               data=self.generation_sample)
@@ -236,9 +220,7 @@ class InstructMusicGenAdapterLitModule(LightningModule):
         loss, preds, targets = self.model_step(batch_for_model)
         # update and log metrics
         self.test_loss(loss)
-        # self.test_acc(preds, targets)
         self.log("test/loss", self.test_loss, on_step=True, on_epoch=True, prog_bar=True)
-        # self.log("test/acc", self.test_acc, on_step=True, on_epoch=True, prog_bar=True)
 
 
 
@@ -271,9 +253,8 @@ class InstructMusicGenAdapterLitModule(LightningModule):
             # output needs to cut off the input length
             output = output.reshape(-1)[len(input):]
             sf.write(output_path, output.float().squeeze(0).cpu().numpy(), 32000)
-            eval_path = f"/weka2/home-yixiao/instruct-MusicGen/test_data/slakh_4stems/add/output/no_tune/{idx}.wav"
-            sf.write(eval_path, output.float().squeeze(0).cpu().numpy(), 32000)
-            print(f"Saved to {eval_path}")
+            # Note: If you need to save evaluation outputs to a specific directory,
+            # configure it via the tmp_dir parameter in your config file
             sf.write(ground_truth_path, ground_truth.float().squeeze(0).cpu().numpy(), 32000)
             input_path_list.append(input_path)
             output_path_list.append(output_path)

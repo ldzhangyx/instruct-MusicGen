@@ -1,3 +1,8 @@
+"""PyTorch Lightning DataModule for the Slakh dataset with instruction-based music editing.
+
+This module handles loading and preprocessing of the Slakh dataset for training
+InstructMusicGen with add, remove, and extract instructions.
+"""
 from typing import Any, Dict, Optional, Tuple, List
 
 import numpy as np
@@ -23,7 +28,7 @@ class SlakhDataModule(LightningDataModule):
         num_workers: int = 0,
         pin_memory: bool = False,
         time_in_seconds: int = 5,
-        steoro_to_mono: bool = True,
+        stereo_to_mono: bool = True,
         persistent_workers: bool = False,
         drop_last: bool = False,
         volume_normalization: bool = True,
@@ -35,21 +40,21 @@ class SlakhDataModule(LightningDataModule):
         self.data_train = SlakhInstructDataset(data_path=data_dir,
                                                sample_rate=32000,
                                                time_in_seconds=time_in_seconds,
-                                               steoro_to_mono=steoro_to_mono,
+                                               stereo_to_mono=stereo_to_mono,
                                                volume_normalization=volume_normalization,
                                                average=average,
                                                split='train', )
         self.data_val = SlakhInstructDataset(data_path=data_dir,
                                              sample_rate=32000,
                                              time_in_seconds=time_in_seconds,
-                                             steoro_to_mono=steoro_to_mono,
+                                             stereo_to_mono=stereo_to_mono,
                                              volume_normalization=volume_normalization,
                                              average=average,
                                              split='validation', )
         self.data_test = SlakhInstructDataset(data_path=data_dir,
                                               sample_rate=32000,
                                               time_in_seconds=time_in_seconds,
-                                              steoro_to_mono=steoro_to_mono,
+                                              stereo_to_mono=stereo_to_mono,
                                               volume_normalization=volume_normalization,
                                               average=average,
                                               split='test', )
@@ -156,7 +161,7 @@ class SlakhInstructDataset(Dataset):
     def __init__(self, data_path: str,
                  sample_rate: int,
                  time_in_seconds: int = 5,
-                 steoro_to_mono: bool = True,
+                 stereo_to_mono: bool = True,
                  volume_normalization: bool = False,
                  average: bool = False,
                  split: str = 'train'):
@@ -179,7 +184,7 @@ class SlakhInstructDataset(Dataset):
             # 'remix'      # output new mix with target stem
         ]
         self.time_in_seconds = time_in_seconds
-        self.stereo_to_mono = steoro_to_mono
+        self.stereo_to_mono = stereo_to_mono
 
         if split != 'train':  # remove 'repeat' instruction from validation and test set
             self.instruct_set = [i for i in self.instruct_set if i != 'repeat']

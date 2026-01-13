@@ -25,7 +25,7 @@ class MoisesDBDataModule(LightningDataModule):
         num_workers: int = 0,
         pin_memory: bool = False,
         time_in_seconds: int = 5,
-        steoro_to_mono: bool = True,
+        stereo_to_mono: bool = True,
 
     ) -> None:
         """Initialize a `MNISTDataModule`.
@@ -42,7 +42,7 @@ class MoisesDBDataModule(LightningDataModule):
                                                sample_rate=32000,
                                                time_in_seconds=time_in_seconds,
                                                cache_dir=cache_dir,
-                                               steoro_to_mono=steoro_to_mono,)  # MusicGen uses 32kHz sample rate
+                                               stereo_to_mono=stereo_to_mono,)  # MusicGen uses 32kHz sample rate
 
         # this line allows to access init params with 'self.hparams' attribute
         # also ensures init params will be stored in ckpt
@@ -155,7 +155,7 @@ class MoisesDBInstructDataset(Dataset):
                  sample_rate: int,
                  cache_dir: str,
                  time_in_seconds: int = 5,
-                 steoro_to_mono: bool = True):
+                 stereo_to_mono: bool = True):
         self.data_path = data_path
         self.sample_rate = sample_rate
         self.data = MoisesDB(data_path=self.data_path)
@@ -169,7 +169,7 @@ class MoisesDBInstructDataset(Dataset):
             # 'repeat',
         ]
         self.time_in_seconds = time_in_seconds
-        self.stereo_to_mono = steoro_to_mono
+        self.stereo_to_mono = stereo_to_mono
         self.cache_dir = cache_dir
 
     def __len__(self):

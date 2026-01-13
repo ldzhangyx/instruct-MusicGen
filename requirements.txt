@@ -34,9 +34,12 @@ progressbar
 webdataset
 wget
 encodec
-laion_clap --install-option="--no-deps"
-frechet_audio_distance --install-option="--no-deps"  # transformers version conflict
+laion_clap
+frechet_audio_distance
 git+https://github.com/haoheliu/audioldm_eval
+
+# Note: If you encounter dependency conflicts with laion_clap or frechet_audio_distance,
+# you can install them separately with: pip install --no-deps laion_clap frechet_audio_distance
 
 # --------- data --------- #
 resampy

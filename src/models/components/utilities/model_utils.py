@@ -50,25 +50,6 @@ def Sequential(*modules):
     return nn.Sequential(*filter(exists, modules))
 
 
-# decorators
-
-def once(fn):
-    called = False
-
-    @wraps(fn)
-    def inner(x):
-        nonlocal called
-        if called:
-            return
-        called = True
-        return fn(x)
-
-    return inner
-
-
-print_once = once(print)
-
-
 # tensor functions
 
 def log(t, eps=1e-20):
