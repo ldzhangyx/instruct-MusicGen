@@ -1,3 +1,14 @@
+"""Training script for InstructMusicGen model.
+
+This script handles the training, validation, and testing of the InstructMusicGen model
+using PyTorch Lightning and Hydra for configuration management.
+
+Example usage:
+    python src/train.py trainer.max_epochs=100 model.lr=1e-4
+
+For more information on using Hydra configuration:
+    https://hydra.cc/docs/intro/
+"""
 from typing import Any, Dict, List, Optional, Tuple
 
 import os
@@ -40,9 +51,8 @@ from src.utils import (
 log = RankedLogger(__name__, rank_zero_only=True)
 
 torch.set_float32_matmul_precision('medium')
-os.environ['CUDA_VISIBLE_DEVICES'] = '3'
+# Note: Set CUDA_VISIBLE_DEVICES environment variable before running if you need to control GPU selection
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
-# os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
 
 @task_wrapper
 def train(cfg: DictConfig) -> Tuple[Dict[str, Any], Dict[str, Any]]:

@@ -1,3 +1,13 @@
+"""Evaluation script for InstructMusicGen model.
+
+This script evaluates a trained InstructMusicGen model checkpoint on a test dataset.
+
+Example usage:
+    python src/eval.py ckpt_path=/path/to/checkpoint.ckpt
+
+For more information on using Hydra configuration:
+    https://hydra.cc/docs/intro/
+"""
 from typing import Any, Dict, List, Tuple
 
 import hydra
@@ -38,7 +48,7 @@ import torch
 import os
 
 torch.set_float32_matmul_precision('medium')
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+# Note: Set CUDA_VISIBLE_DEVICES environment variable before running if you need to control GPU selection
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 
